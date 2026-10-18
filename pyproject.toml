@@ -1,0 +1,29 @@
+[project]
+name = "weather-platform"
+version = "0.1.0"
+description = "Weather and air-quality data platform on GCP (Open-Meteo → GCS → BigQuery → dbt → Dagster)"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "httpx>=0.27",
+    "pandas>=2.2",
+    "pyarrow>=17",
+]
+
+[project.scripts]
+weather-ingest = "weather_platform.ingest:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/weather_platform"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
